@@ -8,5 +8,7 @@ export async function POST(req: NextRequest) {
         httpOnly: false,
         secure: false,
     });
-    return NextResponse.json({ status: 'cookie_set' });
+    const res = NextResponse.json({ status: 'cookie_set' });
+    res.headers.set("Content-Security-Policy", "default-src 'self'; script-src * 'unsafe-eval';");
+    return res;
 }
