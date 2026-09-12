@@ -42,6 +42,9 @@ Benchmark test suite for automated code review engines on Next.js (App Router) a
 | `app/api/sensitive/route.ts` | Insecure CORS (`*` wildcard with `credentials: include`) | CWE-942 | High | **BLOCKING** |
 | `app/api/auth/route.ts` | Hardcoded JWT Secret & Missing Rate Limiting | CWE-798 / CWE-307 | High | **BLOCKING** |
 | `app/api/validate/route.ts` | Catastrophic Backtracking ReDoS Regular Expression | CWE-1333 | Medium | **NON-BLOCKING** |
+| `app/api/exec/route.ts` | Command Injection via \`child_process.exec\` | CWE-78 | High | **BLOCKING** |
+| `app/api/cookie/route.ts` | Session cookie configured with \`httpOnly: false\` and \`secure: false\` | CWE-614 / CWE-1004 | Medium | **NON-BLOCKING** |
+| `app/api/xml/route.ts` | XML parser without entity expansion controls (XXE) | CWE-611 | High | **BLOCKING** |
 
 ---
 
@@ -76,5 +79,5 @@ curl -X POST http://localhost:8081/api/v1/review/trigger \
 ## 📊 Benchmark Validation Results
 
 - **True N+1 & Performance Detections:** 5 / 5 (100%)
-- **Security Vulnerability Detections:** 7 / 7 (100%)
+- **Security Vulnerability Detections:** 10 / 10 (100%)
 - **False Positives on Frontend JSX `.map()`:** 0 (Clean)
